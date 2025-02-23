@@ -28,7 +28,6 @@ export default [
       'jsx-a11y': jsxA11y,
       prettier,
     },
-    extends: ['eslint-config-airbnb', 'eslint-config-prettier'],
     rules: {
       ...js.configs.recommended.rules,
       ...react.configs.recommended.rules,
