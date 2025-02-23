@@ -20,7 +20,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle  # ✅ Gradle 캐싱 추가 (빌드 속도 향상)
+          cache: gradle
 
       - name: Grant execute permission for Gradle Wrapper
         run: chmod +x ./application-api/gradlew
@@ -29,7 +29,7 @@ jobs:
         run: cd application-api && ./gradlew build -x test
 
       - name: Run Tests
-        run: cd application-api && ./gradlew test  # ✅ 테스트 실행 추가
+        run: cd application-api && ./gradlew test
 
   frontend-ci:
     name: Frontend CI (React)
