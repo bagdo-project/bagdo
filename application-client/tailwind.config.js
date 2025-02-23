@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './src/**/*.{jsx}'
-  ],
+  content: ['./src/**/*.{jsx}'],
   screens: {
     sm: '640px',
     md: '768px',
@@ -24,10 +22,10 @@ export default {
     system: {
       300: '#00B031',
       warning: '#EBC812',
-      danger:  '#FB3939',
+      danger: '#FB3939',
     },
   },
   fontFamily: {
     sans: ['맑은 고딕', 'sans-serif'],
   },
-}
+};

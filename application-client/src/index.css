@@ -1,13 +1,15 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @layer base {
-  html, body {
+  html,
+  body {
     @apply font-sans;
     @apply text-neutral-900;
   }
+
   button {
     @apply rounded-md;
     @apply text-neutral-100;
-    background: #8C5B3F;
+    background: #8c5b3f;
   }
 }
