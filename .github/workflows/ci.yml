@@ -25,8 +25,8 @@ jobs:
       - name: Gradle Wrapper 실행 권한 부여
         run: chmod +x ./application-api/gradlew
 
-      - name: Gradle 빌드 (테스트 제외)
-        run: cd application-api && ./gradlew build -x test
+      - name: Gradle 빌드 및 테스트 실행
+        run: cd application-api && ./gradlew build
 
   frontend-ci:
     name: Frontend
