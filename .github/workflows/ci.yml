@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+      - "release/*"
+
+jobs:
+  backend-ci:
+    name: Backend
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v3
+
+      - name: Gradle 캐싱
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: JDK 17 설정
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Gradle Wrapper 실행 권한 부여
+        run: chmod +x ./application-api/gradlew
+
+      # TODO 추 후 작업시 빌드 시 테스트 추가 예정
+      - name: Gradle 빌드
+        run: cd application-api && ./gradlew build -x test
+
+  frontend-ci:
+    name: Frontend
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: 저장소 체크아웃
+        uses: actions/checkout@v3
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'application-client/package-lock.json'
+
+      - name: 의존성 설치
+        run: cd application-client && npm ci
+
+      - name: ESLint 검사
+        run: cd application-client && npm run lint
+
+      - name: 클라이언트 빌드
+        run: cd application-client && npm run build
